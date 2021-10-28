@@ -19,13 +19,21 @@ requirements:
   host:
     - pip
     - python
-
+    - setuptools >= 41.0.0
+    - wheel >= 0.30.0
+    # needed to get correct version number in the metadata
+    - setuptools_scm >= 2
   run:
-    - python
+    - python >=3.6
 
 test:
   imports:
     - filelock
+  requires:
+    - python <3.10
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/benediktschmitt/py-filelock
