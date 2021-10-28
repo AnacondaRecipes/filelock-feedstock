@@ -19,10 +19,10 @@ requirements:
   host:
     - pip
     - python
-    - setuptools >= 41.0.0
-    - wheel >= 0.30.0
+    - setuptools >=41.0.0
+    - wheel >=0.30.0
     # needed to get correct version number in the metadata
-    - setuptools_scm >= 2
+    - setuptools_scm >=2
   run:
     - python >=3.6
 
