@@ -1,5 +1,5 @@
 {% set name = "filelock" %}
-{% set version = "3.0.12" %}
+{% set version = "3.3.1" %}
 
 package:
   name: {{ name }}
@@ -8,7 +8,7 @@ package:
 source:
    fn: {{ name }}-{{ version }}.tar.gz
    url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-   sha256: 18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59
+   sha256: 34a9f35f95c441e7b38209775d6e0337f9a3759f3565f6c5798f19618527c76f
 
 build:
   noarch: python
@@ -19,13 +19,21 @@ requirements:
   host:
     - pip
     - python
-
+    - setuptools >=41.0.0
+    - wheel >=0.30.0
+    # needed to get correct version number in the metadata
+    - setuptools_scm >=2
   run:
-    - python
+    - python >=3.6
 
 test:
   imports:
     - filelock
+  requires:
+    - python <3.10
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/benediktschmitt/py-filelock
