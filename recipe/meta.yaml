@@ -12,7 +12,7 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 0
   script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
@@ -37,7 +37,7 @@ test:
 
 about:
   home: https://github.com/benediktschmitt/py-filelock
-  license: Public Domain
+  license: Unlicense
   license_family: Public-Domain
   license_file: LICENSE
   summary: 'A platform independent file lock.'
