@@ -13,7 +13,7 @@ source:
 build:
   noarch: python
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed .
 
 requirements:
   host:
@@ -30,13 +30,12 @@ test:
   imports:
     - filelock
   requires:
-    - python <3.10
     - pip
   commands:
     - pip check
 
 about:
-  home: https://github.com/benediktschmitt/py-filelock
+  home: https://github.com/tox-dev/py-filelock
   license: Unlicense
   license_family: Public-Domain
   license_file: LICENSE
@@ -49,9 +48,9 @@ about:
     currently used or manipulated (Think of a sync.lock file). Only the
     existence of the lockfile is watched for this purpose. The file itself
     can not be written and is always empty.
-  doc_url: https://filelock.readthedocs.io/en/latest/
-  dev_url: https://github.com/benediktschmitt/py-filelock
-  doc_source_url: https://github.com/benediktschmitt/py-filelock/tree/master/docs
+  doc_url: https://py-filelock.readthedocs.io/en/latest/
+  dev_url: https://github.com/tox-dev/py-filelock
+  doc_source_url: https://github.com/tox-dev/py-filelock/tree/master/docs
 
 extra:
   recipe-maintainers:
