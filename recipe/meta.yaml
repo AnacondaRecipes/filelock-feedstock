@@ -1,5 +1,5 @@
 {% set name = "filelock" %}
-{% set version = "3.8.2" %}
+{% set version = "3.9.0" %}
 
 package:
   name: {{ name }}
@@ -8,23 +8,23 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 7565f628ea56bfcd8e54e42bdc55da899c85c1abfe1b5bcfd147e9188cebb3b2
+  sha256: 7b319f24340b51f55a2bf7a12ac0755a9b03e718311dac567a0f4f7fabd2f5de
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed .
+  skip: True  # [py<37]
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed . -vv
 
 requirements:
   host:
-    - pip
     - python
-    - setuptools >=41.0.0
-    - wheel >=0.30.0
-    # needed to get correct version number in the metadata
-    - setuptools_scm >=2
+    - hatchling
+    - hatch-vcs
+    - pip
+    - setuptools
+    - wheel
   run:
-    - python >=3.7
+    - python
 
 test:
   imports:
@@ -48,7 +48,7 @@ about:
     currently used or manipulated (Think of a sync.lock file). Only the
     existence of the lockfile is watched for this purpose. The file itself
     can not be written and is always empty.
-  doc_url: https://py-filelock.readthedocs.io/en/latest/
+  doc_url: https://py-filelock.readthedocs.io/
   dev_url: https://github.com/tox-dev/py-filelock
   doc_source_url: https://github.com/tox-dev/py-filelock/tree/master/docs
 
