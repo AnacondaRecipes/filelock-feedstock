@@ -50,7 +50,6 @@ about:
     can not be written and is always empty.
   doc_url: https://py-filelock.readthedocs.io/
   dev_url: https://github.com/tox-dev/py-filelock
-  doc_source_url: https://github.com/tox-dev/py-filelock/tree/master/docs
 
 extra:
   recipe-maintainers:
