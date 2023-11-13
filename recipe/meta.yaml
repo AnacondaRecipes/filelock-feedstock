@@ -1,5 +1,5 @@
 {% set name = "filelock" %}
-{% set version = "3.9.0" %}
+{% set version = "3.13.1" %}
 
 package:
   name: {{ name }}
@@ -18,8 +18,8 @@ build:
 requirements:
   host:
     - python
-    - hatchling
-    - hatch-vcs
+    - hatchling 1.18
+    - hatch-vcs 0.3
     - pip
     - setuptools
     - wheel
@@ -40,7 +40,6 @@ about:
   license_family: Public-Domain
   license_file: LICENSE
   summary: A platform independent file lock.
-
   description: |
     A filelock provides a synchronisation mechanism between different
     instances of your application, similar to a thread lock. It can be
