@@ -18,8 +18,8 @@ build:
 requirements:
   host:
     - python
-    - hatchling 1.18
-    - hatch-vcs 0.3
+    - hatchling
+    - hatch-vcs
     - pip
     - setuptools
     - wheel
