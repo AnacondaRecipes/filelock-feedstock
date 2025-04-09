@@ -1,25 +1,24 @@
 {% set name = "filelock" %}
-{% set version = "3.13.1" %}
+{% set version = "3.17.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 521f5f56c50f8426f5e03ad3b281b490a87ef15bc6c526f168290f0c7148d44e
+  sha256: ee4e77401ef576ebb38cd7f13b9b28893194acc20a8e68e18730ba9c0e54660e
 
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: True  # [py<39]
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv
 
 requirements:
   host:
     - python
-    - hatchling
-    - hatch-vcs
+    - hatchling >=1.27
+    - hatch-vcs >=0.4
     - pip
     - setuptools
     - wheel
@@ -27,12 +26,20 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - filelock
   requires:
     - pip
+    - pytest >=8.3.4
+    - pytest-mock >=3.14
+    # >=20.28.1 in upstream, but we don't have that
+    - virtualenv >=20.28.0
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv tests
 
 about:
   home: https://github.com/tox-dev/py-filelock
@@ -47,7 +54,7 @@ about:
     currently used or manipulated (Think of a sync.lock file). Only the
     existence of the lockfile is watched for this purpose. The file itself
     can not be written and is always empty.
-  doc_url: https://py-filelock.readthedocs.io/
+  doc_url: https://py-filelock.readthedocs.io
   dev_url: https://github.com/tox-dev/py-filelock
 
 extra:
