@@ -20,8 +20,6 @@ requirements:
     - hatchling >=1.27
     - hatch-vcs >=0.4
     - pip
-    - setuptools
-    - wheel
   run:
     - python
 
