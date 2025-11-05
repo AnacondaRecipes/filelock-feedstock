@@ -16,10 +16,10 @@ build:
 
 requirements:
   host:
-    - python
-    - hatchling >=1.27
-    - hatch-vcs >=0.5
     - pip
+    - python
+    - hatch-vcs >=0.5
+    - hatchling >=1.27
   run:
     - python
 
@@ -32,6 +32,7 @@ test:
     - pip
     - pytest >=8.3.4
     - pytest-mock >=3.14
+    - pytest-asyncio
     # >=20.28.1 in upstream, but we don't have that
     - virtualenv >=20.28.0
   commands:
@@ -46,7 +47,7 @@ about:
   license_file: LICENSE
   summary: A platform independent file lock.
   description: |
-    A filelock provides a synchronisation mechanism between different
+    A filelock provides a synchronization mechanism between different
     instances of your application, similar to a thread lock. It can be
     used to signalize that files, directories or other resources are
     currently used or manipulated (Think of a sync.lock file). Only the
