@@ -35,7 +35,7 @@ test:
     - pytest-asyncio >=1.3
     # >=21.2 in upstream, but we don't have that
     - virtualenv >=20.28.0  # [not (win and arm64)]
-    - virtualenv
+    - virtualenv # [win and arm64]
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
