@@ -39,7 +39,8 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv tests
+    - pytest -vv tests  # [not (win and arm64)]
+    - pytest -vv tests --deselect=tests/test_virtualenv.py  # [win and arm64]
 
 about:
   home: https://github.com/tox-dev/py-filelock
