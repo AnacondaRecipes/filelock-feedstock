@@ -1,18 +1,19 @@
 {% set name = "filelock" %}
-{% set version = "4.0.12" %}
+{% set version = "4.2.4" %}
 
+# E   ModuleNotFoundError: No module named 'capabilities'
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cf42711a7ac791818b299fab0332a088c65aeeefa36290de98db92c434303b0c
+  sha256: c6d8663535e1650ee430507b4ffbac7b464dd64b7647ea0112a9f406499d163d
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv
-  skip: true  # [py<310]
+  skip: true  # [py<311]
 
 requirements:
   host:
@@ -23,7 +24,6 @@ requirements:
   run:
     - python
 
-# E   ModuleNotFoundError: No module named 'capabilities'
 test:
   imports:
     - filelock
