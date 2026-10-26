@@ -1,7 +1,6 @@
 {% set name = "filelock" %}
 {% set version = "4.1.1" %}
 
-# E   ModuleNotFoundError: No module named 'capabilities'
 package:
   name: {{ name }}
   version: {{ version }}
@@ -25,18 +24,28 @@ requirements:
     - python
 
 test:
+  source_files:
+    - pyproject.toml
+    - tasks
+    - tests
   imports:
     - filelock
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -vv tests
   requires:
     - pip
+    - pytest
+    - pytest-asyncio
+    - pytest-mock
+    - pytest-timeout
+    - virtualenv
 
 about:
   home: https://github.com/tox-dev/py-filelock
-  license: Unlicense
-  license_family: Public-Domain
+  license: MIT
+  license_family: MIT
   license_file: LICENSE
   summary: A platform independent file lock.
   description: |
