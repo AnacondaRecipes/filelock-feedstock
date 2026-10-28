@@ -41,7 +41,9 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -vv tests {{ deselect_tests }}
+    # got this error only on that platform, check in next releases if it fixed
+    # [Errno 66] Directory not empty: 
+    - pytest -vv tests {{ deselect_tests }}  # [not (osx and py==312)]
   requires:
     - pip
     - pytest
