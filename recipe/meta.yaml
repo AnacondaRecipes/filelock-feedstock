@@ -36,6 +36,7 @@ requirements:
 test:
   source_files:
     - pyproject.toml
+    - docs
     - tasks
     - tests
   imports:
