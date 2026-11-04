@@ -1,5 +1,5 @@
 {% set name = "filelock" %}
-{% set version = "4.2.6" %}
+{% set version = "4.2.7" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ee7af8ede36dcaf12e1016d9f7c3a63ecd5497d46f85dab21b8c779b8f944e97
+  sha256: 31f6f7e3a8b6f0bd89114d30c5d5218ea1cfb63e5c4aa695b7559314a209bc7f
 
 build:
   number: 0
@@ -32,6 +32,9 @@ requirements:
 {% set deselect_tests = deselect_tests + " --deselect tests/test_util.py::test_break_lock_file_never_links_a_symlink_swapped_in_under_the_break_name" %}  # [linux and aarch64]
 # AssertionError: assert (42, 'a soft-lock marker left by pid 1016 on r9hbagnruwnujet, which has exited', True)
 {% set deselect_tests = deselect_tests + " --deselect tests/test_strict_soft_failures.py::test_strict_soft_exited_soft_lock_owner_raises_without_waiting" %}  # [win and arm64]
+# The test releases an oplock from a threading.Timer(1.0) and asserts the waiter blocked for >= 1s; on win-arm64 the
+# timer fires a few ms early (measured 0.995-0.998s), so the assertion misses. Seen twice on py3.13, green on py3.12/3.14.
+{% set deselect_tests = deselect_tests + " --deselect tests/test_read_write.py::test_read_write_lock_waits_for_an_oplock_holder_that_answers" %}  # [win and arm64 and py==313]
 
 test:
   source_files:
