@@ -1,5 +1,5 @@
 {% set name = "filelock" %}
-{% set version = "4.2.7" %}
+{% set version = "4.2.10" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 31f6f7e3a8b6f0bd89114d30c5d5218ea1cfb63e5c4aa695b7559314a209bc7f
+  sha256: fcc3c0cb8bfe7f4b3bb0e231c04b15dbad068cb3c2515f343d8fde4dce93bd5d
 
 build:
   number: 0
@@ -21,6 +21,7 @@ requirements:
     - hatch-fancy-pypi-readme >=25.1
     - hatch-vcs >=0.5
     - hatchling >=1.29
+    - python-sbom >=0.1.2
   run:
     - python
 
@@ -48,7 +49,7 @@ test:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # got this error only on that platform, check in next releases if it fixed
-    # [Errno 66] Directory not empty: 
+    # [Errno 66] Directory not empty:
     - pytest -vv tests {{ deselect_tests }}  # [not (osx and py==312)]
   requires:
     - pip
